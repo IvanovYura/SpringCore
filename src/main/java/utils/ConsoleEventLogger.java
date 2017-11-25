@@ -1,9 +1,14 @@
 package utils;
 
-public class ConsoleEventLogger {
+import common.Event;
 
-    public static void log(String message) {
-        System.out.println(message);
+public class ConsoleEventLogger implements EventLogger {
+
+    public void logEvent(Event event) {
+        System.out.println(event.toString());
     }
 
+    static void logError(Throwable t) {
+         t.printStackTrace();
+    }
 }
