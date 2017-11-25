@@ -1,3 +1,5 @@
+package withXML;
+
 import common.Event;
 import utils.ConsoleEventLogger;
 import utils.EventLogger;

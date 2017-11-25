@@ -1,3 +1,5 @@
+package withXML;
+
 import utils.ConsoleEventLogger;
 
 public class Person {

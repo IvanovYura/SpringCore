@@ -1,3 +1,5 @@
+package withXML;
+
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
@@ -23,10 +25,6 @@ class Test {
 
         anotherPerson.getName();
         anotherPerson.getAge();
-
-        if (anotherPerson.equals(person)) {
-            ConsoleEventLogger.log("These are the same objects");
-        }
     }
 
 }

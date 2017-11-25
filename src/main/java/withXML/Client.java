@@ -1,7 +1,10 @@
+package withXML;
+
 public class Client {
 
     private int id;
     private String fullName;
+    private String grreting;
 
     public Client(int id, String fullName) {
         this.id = id;
@@ -22,6 +25,10 @@ public class Client {
 
     public String getFullName() {
         return this.fullName;
+    }
+
+    public void setGrreting(String grreting) {
+        this.grreting = grreting;
     }
 
 }

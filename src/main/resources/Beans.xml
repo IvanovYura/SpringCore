@@ -1,31 +1,27 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
 
-<beans xmlns = "http://www.springframework.org/schema/beans"
-       xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation = "http://www.springframework.org/schema/beans
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
-       default-init-method = "init" >
+       default-init-method="init">
+    <import resource="loggers.xml"/>
 
-    <bean id = "person" class = "Person">
-        <property name = "name" value = "Iurii"/>
-        <property name = "age" value="26"/>
+    <bean id="person" class="withXML.Person">
+        <property name="name" value="Iurii"/>
+        <property name="age" value="26"/>
     </bean>
 
-    <bean id = "app" class = "App">
-        <constructor-arg ref = "client" />
+    <bean id="app" class="withXML.App">
+        <constructor-arg ref="client"/>
         <constructor-arg ref="consoleLogger"/>
     </bean>
 
-    <bean id="client" class = "Client" >
-        <constructor-arg index = "0" value = "1" />
-        <constructor-arg index = "1" value = "Iurii Ivanov" />
+    <bean id="client" class="withXML.Client">
+        <constructor-arg index="0" value="1"/>
+        <constructor-arg index="1" value="Iurii Ivanov"/>
+        <property name="greeting" value="Hello, there!"/>
     </bean>
-
-    <bean id="consoleLogger" class="utils.ConsoleEventLogger"/>
-
-    <bean id="fileLogger" class="utils.FileEventLogger" init-method="init"/>
-
-    <bean id="cacheLogger" class="utils.CacheFileEventLogger" destroy-method="destroy"/>
 
     <bean id="event" scope="prototype">
         <constructor-arg>
@@ -34,6 +30,6 @@
         <constructor-arg ref="dateFormat"/>
     </bean>
 
-    <bean id="dateFormat" class="java.text.DateFormat" factory-method = "getDateTimeInstance"/>
+    <bean id="dateFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance"/>
 
 </beans>
