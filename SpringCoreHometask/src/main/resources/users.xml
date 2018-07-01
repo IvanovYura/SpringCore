@@ -1,0 +1,32 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="userService" class="com.epam.spring.core.service.impl.UserServiceImp">
+        <constructor-arg ref="userRepository"/>
+    </bean>
+
+    <bean id="userRepository" class="com.epam.spring.core.repository.UserRepository">
+        <constructor-arg>
+            <list>
+                <ref bean="iurii"/>
+                <ref bean="alex"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="iurii" class="com.epam.spring.core.domain.User">
+        <property name="firstName" value="Iurii"/>
+        <property name="lastName" value="Ivanov"/>
+        <property name="email" value="iurii_ivanov@epam.com"/>
+    </bean>
+
+    <bean id="alex" class="com.epam.spring.core.domain.User">
+        <property name="firstName" value="Alex"/>
+        <property name="lastName" value="Smith"/>
+        <property name="email" value="alex_smith@epam.com"/>
+    </bean>
+
+</beans>
