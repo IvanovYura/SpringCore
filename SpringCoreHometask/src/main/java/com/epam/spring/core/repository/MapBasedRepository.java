@@ -12,6 +12,10 @@ public class MapBasedRepository<T extends BaseDomainObject> {
     private Map<Long, T> map = new HashMap<>();
     private AtomicLong id = new AtomicLong();
 
+    MapBasedRepository() {
+
+    }
+
     MapBasedRepository(Collection<T> collection) {
         collection.forEach(object -> map.putIfAbsent(id.getAndIncrement(), object));
     }

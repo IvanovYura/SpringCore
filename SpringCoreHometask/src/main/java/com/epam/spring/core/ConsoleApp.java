@@ -6,12 +6,38 @@ import com.epam.spring.core.domain.Ticket;
 import com.epam.spring.core.domain.User;
 
 import java.time.LocalDateTime;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 class ConsoleApp {
+
+    enum Commands {
+        QUIT("quit"),
+        HELP("help"),
+        BOOK_TICKET("book_ticket"),
+        GET_USERS("get users"),
+        GET_EVENTS("get events"),
+        GET_AUDITORIUMS("get auditoriums"),
+        SET_AUDITORIUM("set auditorium"),
+        GET_TICKETS("get tickets");
+
+        private static final Map<String, Commands> map = new HashMap<>();
+
+        static {
+            Arrays.stream(values()).forEach(value -> map.putIfAbsent(value.command, value));
+        }
+
+        private String command;
+
+        Commands(String command) {
+            this.command = command;
+        }
+
+        static Commands getByCommandCommand(String command) {
+            return map.get(command);
+        }
+    }
 
     private App app;
 
@@ -25,29 +51,30 @@ class ConsoleApp {
     void start() {
         while (true) {
             String line = scanner.nextLine();
-            switch (line) {
-                case "quit":
+            if (line.isEmpty() || Commands.getByCommandCommand(line) == null) continue;
+            switch (Commands.getByCommandCommand(line)) {
+                case QUIT:
                     System.exit(0);
                     break;
-                case "help":
+                case HELP:
                     usage();
                     break;
-                case "get users":
+                case GET_USERS:
                     getUsers();
                     break;
-                case "get events":
+                case GET_EVENTS:
                     getEvents();
                     break;
-                case "set auditorium":
+                case SET_AUDITORIUM:
                     setAuditorium();
                     break;
-                case "get auditoriums":
+                case GET_AUDITORIUMS:
                     getAuditoriums();
                     break;
-                case "book ticket":
+                case BOOK_TICKET:
                     bookTicket();
                     break;
-                case "get tickets":
+                case GET_TICKETS:
                     getTickets();
                     break;
             }
@@ -55,7 +82,8 @@ class ConsoleApp {
     }
 
     private void usage() {
-
+        System.out.println("Available commands:");
+        Commands.map.forEach((key, value) -> System.out.println(key));
     }
 
     private void getUsers() {
@@ -93,6 +121,7 @@ class ConsoleApp {
             Set<Ticket> tickets = Stream.of(
                     new Ticket(user, event, LocalDateTime.parse(args[2]), Long.parseLong(args[3])))
                     .collect(Collectors.toSet());
+            user.setTickets(tickets);
             app.bookingService.bookTickets(tickets);
             break;
         }

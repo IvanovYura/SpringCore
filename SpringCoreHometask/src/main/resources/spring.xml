@@ -8,11 +8,13 @@
     <import resource="users.xml"/>
     <import resource="events.xml"/>
     <import resource="auditoriums.xml"/>
+    <import resource="booking.xml"/>
 
     <bean id="app" class="com.epam.spring.core.App">
         <property name="userService" ref="userService"/>
         <property name="eventService" ref="eventService"/>
         <property name="auditoriumService" ref="auditoriumService"/>
+        <property name="bookingService" ref="bookingService"/>
     </bean>
 
 </beans>
