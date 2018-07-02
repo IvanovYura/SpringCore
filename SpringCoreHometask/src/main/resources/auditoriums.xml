@@ -1,0 +1,31 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="auditoriumService" class="com.epam.spring.core.service.impl.AuditoriumServiceImpl">
+        <constructor-arg ref="auditoriumRepository"/>
+    </bean>
+
+    <bean id="auditoriumRepository" class="com.epam.spring.core.repository.AuditoriumRepository">
+        <constructor-arg>
+            <list>
+                <ref bean="auditorium2"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean name="auditorium2" class="com.epam.spring.core.domain.Auditorium">
+        <property name="name" value="Room 2"/>
+        <property name="numberOfSeats" value="200"/>
+        <property name="vipSeats">
+            <set>
+                <value>4</value>
+                <value>5</value>
+                <value>6</value>
+            </set>
+        </property>
+    </bean>
+
+</beans>

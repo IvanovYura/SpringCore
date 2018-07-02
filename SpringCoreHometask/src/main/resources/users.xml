@@ -12,7 +12,6 @@
         <constructor-arg>
             <list>
                 <ref bean="iurii"/>
-                <ref bean="alex"/>
             </list>
         </constructor-arg>
     </bean>
@@ -21,12 +20,6 @@
         <property name="firstName" value="Iurii"/>
         <property name="lastName" value="Ivanov"/>
         <property name="email" value="iurii_ivanov@epam.com"/>
-    </bean>
-
-    <bean id="alex" class="com.epam.spring.core.domain.User">
-        <property name="firstName" value="Alex"/>
-        <property name="lastName" value="Smith"/>
-        <property name="email" value="alex_smith@epam.com"/>
     </bean>
 
 </beans>

@@ -6,10 +6,13 @@
  		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
     <import resource="users.xml"/>
+    <import resource="events.xml"/>
+    <import resource="auditoriums.xml"/>
 
     <bean id="app" class="com.epam.spring.core.App">
         <property name="userService" ref="userService"/>
+        <property name="eventService" ref="eventService"/>
+        <property name="auditoriumService" ref="auditoriumService"/>
     </bean>
-
 
 </beans>

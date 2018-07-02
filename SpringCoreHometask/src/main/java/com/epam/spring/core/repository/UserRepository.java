@@ -21,8 +21,4 @@ public class UserRepository extends MapBasedRepository<User> {
 
         return user.orElse(null);
     }
-
-    public Map<Long, User> getMap() {
-        return super.getMap();
-    }
 }

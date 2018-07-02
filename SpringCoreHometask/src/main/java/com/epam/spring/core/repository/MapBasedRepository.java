@@ -29,7 +29,7 @@ public class MapBasedRepository<T extends BaseDomainObject> {
         return map.get(id);
     }
 
-    Map<Long, T> getMap() {
+    public Map<Long, T> getMap() {
         return map;
     }
 }
