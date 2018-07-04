@@ -3,15 +3,20 @@ package com.epam.spring.core.domain;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
+import org.springframework.lang.NonNull;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @EqualsAndHashCode
-@ToString
+@ToString(exclude = "user")
 public class Ticket extends BaseDomainObject implements Comparable<Ticket> {
 
-    @Getter
     private User user;
+
+    public String getUser() {
+        return user.getFirstName() + user.getLastName() + user.getEmail();
+    }
 
     @Getter
     private Event event;
@@ -31,15 +36,15 @@ public class Ticket extends BaseDomainObject implements Comparable<Ticket> {
 
     @Override
     public int compareTo(Ticket other) {
-        if (other == null) {
+        if (Objects.isNull(other)) {
             return 1;
         }
-        int result = dateTime.compareTo(other.getDateTime());
+        Integer result = dateTime.compareTo(other.getDateTime());
 
-        if (result == 0) {
+        if (result.equals(0)) {
             result = event.getName().compareTo(other.getEvent().getName());
         }
-        if (result == 0) {
+        if (result.equals(0)) {
             result = Long.compare(seat, other.getSeat());
         }
         return result;

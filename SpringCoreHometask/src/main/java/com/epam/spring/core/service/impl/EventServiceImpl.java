@@ -23,17 +23,17 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event save(Event object) {
-        return null;
+        return eventRepository.add(object);
     }
 
     @Override
     public void remove(Long id) {
-
+        eventRepository.remove(id);
     }
 
     @Override
     public Event getById(Long id) {
-        return null;
+        return eventRepository.getById(id);
     }
 
     @Override

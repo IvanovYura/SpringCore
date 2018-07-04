@@ -6,7 +6,10 @@
 
     <bean id="bookingService" class="com.epam.spring.core.service.impl.BookingServiceImpl">
         <constructor-arg ref="ticketRepository"/>
+        <property name="discountService" ref="discountService"/>
     </bean>
+
+    <bean name="discountService" class="com.epam.spring.core.service.impl.DiscountServiceImpl"/>
 
     <bean id="ticketRepository" class="com.epam.spring.core.repository.TicketRepository"/>
 

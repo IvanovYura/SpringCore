@@ -28,12 +28,12 @@ public class AuditoriumServiceImpl implements AuditoriumService {
 
     @Override
     public void remove(Long id) {
-
+        auditoriumRepository.remove(id);
     }
 
     @Override
     public Auditorium getById(Long id) {
-        return null;
+        return auditoriumRepository.getById(id);
     }
 
     @Override

@@ -6,12 +6,13 @@ import com.epam.spring.core.domain.User;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
 public interface BookingService {
 
-    double getTicketsPrice(@NonNull Event event, @NonNull LocalDateTime dateTime, @Nullable User user,
+    double getTicketsPrice(@NonNull Event event, @NonNull LocalDate dateTime, @Nullable User user,
                            @NonNull Set<Long> seats);
 
     void bookTickets(@NonNull Set<Ticket> tickets);
