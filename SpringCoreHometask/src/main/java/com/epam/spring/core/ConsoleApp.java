@@ -68,6 +68,9 @@ class ConsoleApp {
                 case GET_TICKET_PRICE:
                     getTicketsPrice();
                     break;
+                case GET_EVENT:
+                    getEvent();
+                    break;
 
             }
         }
@@ -86,7 +89,8 @@ class ConsoleApp {
         CREATE_USER("create user"),
         REMOVE_USER("delete user"),
         GET_USER("get user"),
-        GET_TICKET_PRICE("get ticket price");
+        GET_TICKET_PRICE("get ticket price"),
+        GET_EVENT("get event");
 
         private static final Map<String, Commands> map = new HashMap<>();
 
@@ -105,7 +109,6 @@ class ConsoleApp {
         }
     }
 
-
     private void usage() {
         System.out.println("Available commands:");
         Commands.map.forEach((key, value) -> System.out.println(key));
@@ -121,6 +124,23 @@ class ConsoleApp {
 
     private void getAuditoriums() {
         app.auditoriumService.getAll().forEach(System.out::println);
+    }
+
+    private void getEvent() {
+        while (true) {
+            System.out.println("Specify event name");
+            String line = scanner.nextLine();
+            if (parseLine(line).length != 1) {
+                continue;
+            }
+            Event event = app.eventService.getByName(line);
+            if (Objects.isNull(event)) {
+                System.out.println("There is no such event");
+                continue;
+            }
+            System.out.println(event.toString());
+            break;
+        }
     }
 
     private void getTickets() {
