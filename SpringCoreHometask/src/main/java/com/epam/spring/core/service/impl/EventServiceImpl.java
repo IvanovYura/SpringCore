@@ -3,11 +3,13 @@ package com.epam.spring.core.service.impl;
 import com.epam.spring.core.domain.Event;
 import com.epam.spring.core.repository.EventRepository;
 import com.epam.spring.core.service.EventService;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Component("eventService")
 public class EventServiceImpl implements EventService {
 
     private EventRepository eventRepository;

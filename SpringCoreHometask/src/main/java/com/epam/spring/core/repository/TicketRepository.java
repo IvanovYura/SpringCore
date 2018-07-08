@@ -1,9 +1,12 @@
 package com.epam.spring.core.repository;
 
 import com.epam.spring.core.domain.Ticket;
+import org.springframework.stereotype.Component;
+
 import java.util.Collection;
 
-public class TicketRepository extends  MapBasedRepository<Ticket> {
+@Component
+public class TicketRepository extends MapBasedRepository<Ticket> {
 
     TicketRepository(Collection<Ticket> collection) {
         super(collection);

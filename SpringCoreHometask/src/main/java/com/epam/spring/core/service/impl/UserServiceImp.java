@@ -3,11 +3,13 @@ package com.epam.spring.core.service.impl;
 import com.epam.spring.core.domain.User;
 import com.epam.spring.core.repository.UserRepository;
 import com.epam.spring.core.service.UserService;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Component("userService")
 public class UserServiceImp implements UserService {
 
     private UserRepository userRepository;

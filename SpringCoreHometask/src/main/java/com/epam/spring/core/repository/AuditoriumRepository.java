@@ -1,16 +1,18 @@
 package com.epam.spring.core.repository;
 
 import com.epam.spring.core.domain.Auditorium;
-import com.epam.spring.core.domain.Event;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 
+@Component
 public class AuditoriumRepository extends MapBasedRepository<Auditorium> {
 
-    AuditoriumRepository(Collection<Auditorium> auditoriums) {
+    AuditoriumRepository(@Value("#{auditoriumsHolder.auditoriums}") Collection<Auditorium> auditoriums) {
         super(auditoriums);
     }
 

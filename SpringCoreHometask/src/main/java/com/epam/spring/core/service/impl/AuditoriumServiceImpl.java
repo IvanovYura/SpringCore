@@ -3,11 +3,13 @@ package com.epam.spring.core.service.impl;
 import com.epam.spring.core.domain.Auditorium;
 import com.epam.spring.core.repository.AuditoriumRepository;
 import com.epam.spring.core.service.AuditoriumService;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Component("auditoriumService")
 public class AuditoriumServiceImpl implements AuditoriumService {
 
     private AuditoriumRepository auditoriumRepository;

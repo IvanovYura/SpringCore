@@ -9,6 +9,7 @@ import com.epam.spring.core.service.BookingService;
 import com.epam.spring.core.service.DiscountService;
 import com.sun.istack.internal.NotNull;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,6 +18,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Component("bookingService")
 public class BookingServiceImpl implements BookingService {
 
     private static final double HIGH_RATE = 1.2;

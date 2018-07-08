@@ -32,4 +32,18 @@ public class User extends BaseDomainObject {
     @Getter
     @Setter
     private LocalDate birthday;
+
+    public static User create(
+            String firstName,
+            String lastName,
+            String email,
+            LocalDate birthday) {
+
+        User user = new User();
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setEmail(email);
+        user.setBirthday(birthday);
+        return user;
+    }
 }

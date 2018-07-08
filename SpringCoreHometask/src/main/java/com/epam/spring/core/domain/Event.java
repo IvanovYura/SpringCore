@@ -33,6 +33,22 @@ public class Event extends BaseDomainObject {
     @Getter
     private Map<LocalDateTime, Auditorium> auditoriums = new HashMap<>();
 
+    public static Event create(
+            String name,
+            Set<LocalDateTime> airDates,
+            double basePrice,
+            EventRaiting raiting,
+            Map<LocalDateTime, Auditorium> auditoriums) {
+
+        Event event = new Event();
+        event.setName(name);
+        event.setAirDates(airDates);
+        event.setBasePrice(basePrice);
+        event.setEventRaiting(raiting);
+        event.setAuditoriums(auditoriums);
+        return event;
+    }
+
     public boolean assignAuditorium(LocalDateTime dateTime, Auditorium auditorium) {
         if (airDates.contains(dateTime)) {
             auditoriums.put(dateTime, auditorium);

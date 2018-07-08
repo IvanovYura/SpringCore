@@ -30,6 +30,18 @@ public class Auditorium extends BaseDomainObject {
     public Auditorium() {
     }
 
+    public static Auditorium create(
+            String name,
+            long numberOfSeats,
+            Set<Long> vipSeats) {
+
+        Auditorium auditorium = new Auditorium();
+        auditorium.setName(name);
+        auditorium.setNumberOfSeats(numberOfSeats);
+        auditorium.setVipSeats(vipSeats);
+        return auditorium;
+    }
+
     public long countVipSeats(Collection<Long> seats) {
         return seats.stream().filter(seat -> vipSeats.contains(seat)).count();
     }
