@@ -4,6 +4,7 @@ import com.epam.spring.core.domain.Auditorium;
 import com.epam.spring.core.domain.Event;
 import com.epam.spring.core.domain.Ticket;
 import com.epam.spring.core.domain.User;
+import com.epam.spring.core.repository.CounterRepository;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -71,6 +72,24 @@ class ConsoleApp {
                 case GET_EVENT:
                     getEvent();
                     break;
+                case GET_EVENT_NAME_INVOCATION_AMOUNT:
+                    getEventInvocationAmount();
+                    break;
+                case GET_EVENT_PRICE:
+                    getEventPrice();
+                    break;
+                case GET_EVENT_PRICE_INVOCATION_AMOUNT:
+                    getEventPriceInvocationAmount();
+                    break;
+                case GET_BOOK_TICKET_INVOCATION_AMOUNT:
+                    getBookTicketsInvocationAmount();
+                    break;
+                case GET_DISCOUNT:
+                    getDiscount();
+                    break;
+                case GET_DISCOUNT_GETTING_INVOCATION_AMOUNT:
+                    getDiscountGettingInvocationAmount();
+                    break;
 
             }
         }
@@ -90,7 +109,13 @@ class ConsoleApp {
         REMOVE_USER("delete user"),
         GET_USER("get user"),
         GET_TICKET_PRICE("get ticket price"),
-        GET_EVENT("get event");
+        GET_EVENT("get event"),
+        GET_EVENT_PRICE("get event price"),
+        GET_DISCOUNT("get discount"),
+        GET_EVENT_NAME_INVOCATION_AMOUNT("get event invocation amount"),
+        GET_EVENT_PRICE_INVOCATION_AMOUNT("get event price invocation amount"),
+        GET_BOOK_TICKET_INVOCATION_AMOUNT("get book tickets invocation amount"),
+        GET_DISCOUNT_GETTING_INVOCATION_AMOUNT("get getting discount invocation amount");
 
         private static final Map<String, Commands> map = new HashMap<>();
 
@@ -114,6 +139,43 @@ class ConsoleApp {
         Commands.map.forEach((key, value) -> System.out.println(key));
     }
 
+    private void getEventPrice() {
+        while (true) {
+            System.out.println("Specify event name");
+            String line = scanner.nextLine();
+            if (parseLine(line).length != 1) {
+                continue;
+            }
+            double price = app.eventService.getEventPrice(line);
+            if (price == 0) {
+                System.out.println("There is no price for such event");
+                continue;
+            }
+            System.out.println(price);
+            break;
+        }
+    }
+
+    private void getDiscount() {
+        while (true) {
+            System.out.println("Specify user email, event name, date time");
+            String line = scanner.nextLine();
+            String[] args = parseLine(line);
+            if (args.length < 3) {
+                System.out.println(WRONG_ARGUMENTS_AMOUNT);
+                continue;
+            }
+            User user = app.userService.getUserByEmail(args[0]);
+            if (Objects.isNull(user)) {
+                System.out.println("There is no such user");
+                continue;
+            }
+            Event event = app.eventService.getByName(args[1]);
+            System.out.println(app.discountService.getDiscount(user, event, LocalDate.parse(args[2])));
+            break;
+        }
+    }
+
     private void getUsers() {
         app.userService.getAll().forEach(System.out::println);
     }
@@ -124,6 +186,22 @@ class ConsoleApp {
 
     private void getAuditoriums() {
         app.auditoriumService.getAll().forEach(System.out::println);
+    }
+
+    private void getEventInvocationAmount() {
+        System.out.println(CounterRepository.get("Event"));
+    }
+
+    private void getEventPriceInvocationAmount() {
+        System.out.println(CounterRepository.get("EventPrice"));
+    }
+
+    private void getBookTicketsInvocationAmount() {
+        System.out.println(CounterRepository.get("BookTicket"));
+    }
+
+    private void getDiscountGettingInvocationAmount() {
+        System.out.println(CounterRepository.get("Discount"));
     }
 
     private void getEvent() {
@@ -161,6 +239,7 @@ class ConsoleApp {
             } else {
                 app.bookingService.getPurchasedTicketsForEvent(event, LocalDateTime.parse(args[1]))
                         .forEach(System.out::println);
+                break;
             }
         }
     }

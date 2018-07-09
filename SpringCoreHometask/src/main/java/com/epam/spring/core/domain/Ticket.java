@@ -3,7 +3,6 @@ package com.epam.spring.core.domain;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-import org.springframework.lang.NonNull;
 
 import java.time.LocalDateTime;
 import java.util.Objects;

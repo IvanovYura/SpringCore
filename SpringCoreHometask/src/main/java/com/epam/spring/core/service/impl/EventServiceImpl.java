@@ -39,6 +39,12 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    public double getEventPrice(String name) {
+        Event event = getByName(name);
+        return event == null ? 0 : event.getBasePrice();
+    }
+
+    @Override
     public Collection<Event> getAll() {
         return eventRepository.getMap().entrySet().stream()
                 .map(Map.Entry::getValue)

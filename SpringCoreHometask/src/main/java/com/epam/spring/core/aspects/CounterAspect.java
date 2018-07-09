@@ -11,18 +11,29 @@ import org.springframework.stereotype.Component;
 public class CounterAspect {
 
     @Pointcut("execution(* com.epam.spring.core.service.EventService.getByName(..))")
-    public void countEventsInvocationAmount() {
-        //
+    public void eventsInvocationAmount() {
     }
 
-    @After("countEventsInvocationAmount()")
-    public void logEventEnvocationAmount() {
+    @Pointcut("execution(* com.epam.spring.core.service.EventService.getEventPrice(..))")
+    public void eventPriceInvocationAmount() {
+    }
+
+    @Pointcut("execution(* com.epam.spring.core.service.BookingService.bookTickets(..))")
+    public void bookTicketInvocationAmount() {
+    }
+
+    @After("eventsInvocationAmount()")
+    public void countEventInvocationAmount() {
         CounterRepository.add("Event", 1L);
-        System.out.println(CounterRepository.get("Event"));
     }
 
-    // get Price -> how many time
-    // ticket
-    // discount
-    // lucky winner -> always true for ME 
+    @After("eventPriceInvocationAmount()")
+    public void countEventPriceInvocationAmount() {
+        CounterRepository.add("EventPrice", 1L);
+    }
+
+    @After("bookTicketInvocationAmount()")
+    public void countBookTicketInvocationAmount() {
+        CounterRepository.add("BookTicket", 1L);
+    }
 }

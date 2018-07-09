@@ -5,6 +5,7 @@ import com.epam.spring.core.domain.Ticket;
 import com.epam.spring.core.domain.User;
 import com.epam.spring.core.service.DiscountService;
 import org.springframework.lang.Nullable;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,6 +13,7 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component("discountService")
 public class DiscountServiceImpl implements DiscountService {
 
     @Override

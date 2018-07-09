@@ -8,4 +8,6 @@ public interface EventService extends AbstractDomainObjectService<Event> {
 
     @Nullable
     Event getByName(@NonNull String name);
+
+    double getEventPrice(@NonNull String name);
 }
