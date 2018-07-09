@@ -24,7 +24,7 @@ public class AuditoriumsHolder {
 
     @PostConstruct
     @SuppressWarnings("unchecked")
-    void init() {
+    private void init() {
         auditoriums.add(Auditorium.create(
                 roomName,
                 numberOfSeats,

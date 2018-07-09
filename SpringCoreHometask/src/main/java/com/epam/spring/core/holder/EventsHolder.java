@@ -6,6 +6,7 @@ import com.epam.spring.core.domain.EventRaiting;
 import lombok.Getter;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,8 +19,9 @@ public class EventsHolder {
     @Getter
     private Collection<Event> events = new ArrayList<>();
 
+    @PostConstruct
     @SuppressWarnings("unchecked")
-    EventsHolder() {
+    private void init() {
         events.add(Event.create(
                 "Avengers",
                 new HashSet() {{
