@@ -1,8 +1,10 @@
 package com.epam.spring.core.service.impl;
 
+import com.epam.spring.core.dao.UserDAO;
 import com.epam.spring.core.domain.User;
 import com.epam.spring.core.repository.UserRepository;
 import com.epam.spring.core.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -12,6 +14,9 @@ import java.util.stream.Collectors;
 @Component("userService")
 public class UserServiceImp implements UserService {
 
+    @Autowired
+    private UserDAO userDAO;
+
     private UserRepository userRepository;
 
     UserServiceImp(UserRepository userRepository) {
@@ -20,7 +25,7 @@ public class UserServiceImp implements UserService {
 
     @Override
     public User getUserByEmail(String email) {
-        return userRepository.findSingleOrDefault(email);
+        return userDAO.getUserByEmail(email);
     }
 
     @Override
@@ -35,7 +40,7 @@ public class UserServiceImp implements UserService {
 
     @Override
     public User getById(Long id) {
-        return userRepository.getById(id);
+        return userDAO.getUserById(id);
     }
 
     @Override

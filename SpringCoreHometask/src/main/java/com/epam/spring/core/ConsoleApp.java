@@ -274,6 +274,7 @@ class ConsoleApp {
                 System.out.println("There is no such user with following id: " + line);
                 continue;
             }
+            System.out.println(user);
             break;
         }
     }
