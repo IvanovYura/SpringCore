@@ -39,21 +39,21 @@ class ConsoleApp {
                 case GET_USERS:
                     getUsers();
                     break;
-                case GET_EVENTS:
-                    getEvents();
-                    break;
-                case SET_AUDITORIUM:
-                    setAuditorium();
-                    break;
-                case GET_AUDITORIUMS:
-                    getAuditoriums();
-                    break;
-                case BOOK_TICKET:
-                    bookTicket();
-                    break;
-                case GET_TICKETS:
-                    getTickets();
-                    break;
+//                case GET_EVENTS:
+//                    getEvents();
+//                    break;
+//                case SET_AUDITORIUM:
+//                    setAuditorium();
+//                    break;
+//                case GET_AUDITORIUMS:
+//                    getAuditoriums();
+//                    break;
+//                case BOOK_TICKET:
+//                    bookTicket();
+//                    break;
+//                case GET_TICKETS:
+//                    getTickets();
+//                    break;
                 case CREATE_USER:
                     createUser();
                     break;
@@ -63,34 +63,33 @@ class ConsoleApp {
                 case GET_USER:
                     getUser();
                     break;
-                case GET_AUDITORIUM:
-                    getAuditorium();
-                    break;
-                case GET_TICKET_PRICE:
-                    getTicketsPrice();
-                    break;
-                case GET_EVENT:
-                    getEvent();
-                    break;
-                case GET_EVENT_NAME_INVOCATION_AMOUNT:
-                    getEventInvocationAmount();
-                    break;
-                case GET_EVENT_PRICE:
-                    getEventPrice();
-                    break;
-                case GET_EVENT_PRICE_INVOCATION_AMOUNT:
-                    getEventPriceInvocationAmount();
-                    break;
-                case GET_BOOK_TICKET_INVOCATION_AMOUNT:
-                    getBookTicketsInvocationAmount();
-                    break;
-                case GET_DISCOUNT:
-                    getDiscount();
-                    break;
-                case GET_DISCOUNT_GETTING_INVOCATION_AMOUNT:
-                    getDiscountGettingInvocationAmount();
-                    break;
-
+//                case GET_AUDITORIUM:
+//                    getAuditorium();
+//                    break;
+//                case GET_TICKET_PRICE:
+//                    getTicketsPrice();
+//                    break;
+//                case GET_EVENT:
+//                    getEvent();
+//                    break;
+//                case GET_EVENT_NAME_INVOCATION_AMOUNT:
+//                    getEventInvocationAmount();
+//                    break;
+//                case GET_EVENT_PRICE:
+//                    getEventPrice();
+//                    break;
+//                case GET_EVENT_PRICE_INVOCATION_AMOUNT:
+//                    getEventPriceInvocationAmount();
+//                    break;
+//                case GET_BOOK_TICKET_INVOCATION_AMOUNT:
+//                    getBookTicketsInvocationAmount();
+//                    break;
+//                case GET_DISCOUNT:
+//                    getDiscount();
+//                    break;
+//                case GET_DISCOUNT_GETTING_INVOCATION_AMOUNT:
+//                    getDiscountGettingInvocationAmount();
+//                    break;
             }
         }
     }
@@ -98,24 +97,24 @@ class ConsoleApp {
     private enum Commands {
         QUIT("quit"),
         HELP("help"),
-        BOOK_TICKET("book ticket"),
+//        BOOK_TICKET("book ticket"),
         GET_USERS("get users"),
-        GET_EVENTS("get events"),
-        GET_AUDITORIUMS("get auditoriums"),
-        SET_AUDITORIUM("set auditorium"),
-        GET_AUDITORIUM("get auditorium"),
-        GET_TICKETS("get tickets"),
+//        GET_EVENTS("get events"),
+//        GET_AUDITORIUMS("get auditoriums"),
+//        SET_AUDITORIUM("set auditorium"),
+//        GET_AUDITORIUM("get auditorium"),
+//        GET_TICKETS("get tickets"),
         CREATE_USER("create user"),
         REMOVE_USER("delete user"),
-        GET_USER("get user"),
-        GET_TICKET_PRICE("get ticket price"),
-        GET_EVENT("get event"),
-        GET_EVENT_PRICE("get event price"),
-        GET_DISCOUNT("get discount"),
-        GET_EVENT_NAME_INVOCATION_AMOUNT("get event invocation amount"),
-        GET_EVENT_PRICE_INVOCATION_AMOUNT("get event price invocation amount"),
-        GET_BOOK_TICKET_INVOCATION_AMOUNT("get book tickets invocation amount"),
-        GET_DISCOUNT_GETTING_INVOCATION_AMOUNT("get getting discount invocation amount");
+        GET_USER("get user");
+//        GET_TICKET_PRICE("get ticket price"),
+//        GET_EVENT("get event"),
+//        GET_EVENT_PRICE("get event price"),
+//        GET_DISCOUNT("get discount"),
+//        GET_EVENT_NAME_INVOCATION_AMOUNT("get event invocation amount"),
+//        GET_EVENT_PRICE_INVOCATION_AMOUNT("get event price invocation amount"),
+//        GET_BOOK_TICKET_INVOCATION_AMOUNT("get book tickets invocation amount"),
+//        GET_DISCOUNT_GETTING_INVOCATION_AMOUNT("get getting discount invocation amount");
 
         private static final Map<String, Commands> map = new HashMap<>();
 
@@ -246,9 +245,9 @@ class ConsoleApp {
 
     private void createUser() {
         while (true) {
-            System.out.println("Specify first name, last name and email");
+            System.out.println("Specify first name, last name, email and birthday");
             String[] args = parseLine(scanner.nextLine());
-            if (args.length < 3) {
+            if (args.length < 4) {
                 System.out.println(WRONG_ARGUMENTS_AMOUNT);
                 continue;
             }
@@ -256,6 +255,7 @@ class ConsoleApp {
             user.setFirstName(args[0]);
             user.setLastName(args[1]);
             user.setEmail(args[2]);
+            user.setBirthday(LocalDate.parse(args[3]));
             System.out.println(app.userService.save(user).toString());
             break;
         }

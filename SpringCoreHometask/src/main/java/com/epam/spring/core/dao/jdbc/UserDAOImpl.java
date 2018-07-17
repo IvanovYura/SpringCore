@@ -2,7 +2,6 @@ package com.epam.spring.core.dao.jdbc;
 
 import com.epam.spring.core.dao.UserDAO;
 import com.epam.spring.core.domain.User;
-import com.epam.spring.core.service.impl.BaseDbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -13,11 +12,21 @@ import org.springframework.stereotype.Service;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 @Service("userDAO")
 public class UserDAOImpl implements UserDAO {
+
+    private static final String SELECT_USERS =
+            "SELECT * FROM USERS";
+
+    private static final String INSERT_USER =
+            "INSERT INTO USERS (FIRST_NAME, LAST_NAME, EMAIL, BIRTHDAY) VALUES (:first_name, :last_name, :email, :birthday)";
+
+    private static final String DELETE_USER =
+            "DELETE FROM USERS WHERE USER_ID = :user_id";
 
     @Autowired
     @Qualifier("jdbcTemplate")
@@ -27,7 +36,7 @@ public class UserDAOImpl implements UserDAO {
     public User getUserByEmail(String email) {
         Map<String, String> params = new HashMap<>();
         params.put("email", email);
-        return namedParameterJdbcTemplate.queryForObject(BaseDbService.SELECT_USERS + " WHERE EMAIL = :email",
+        return namedParameterJdbcTemplate.queryForObject(SELECT_USERS + " WHERE EMAIL = :email",
                 params,
                 rowMapper()
         );
@@ -37,10 +46,33 @@ public class UserDAOImpl implements UserDAO {
     public User getUserById(Long id) {
         Map<String, Long> params = new HashMap<>();
         params.put("user_id", id);
-        return namedParameterJdbcTemplate.queryForObject(BaseDbService.SELECT_USERS + " WHERE USER_ID = :user_id",
+        return namedParameterJdbcTemplate.queryForObject(SELECT_USERS + " WHERE USER_ID = :user_id",
                 params,
                 rowMapper()
         );
+    }
+
+    @Override
+    public User add(User user) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("first_name", user.getFirstName());
+        params.put("last_name", user.getLastName());
+        params.put("email", user.getEmail());
+        params.put("birthday", user.getBirthday().toString());
+        namedParameterJdbcTemplate.update(INSERT_USER, params);
+        return getUserByEmail(user.getEmail());
+    }
+
+    @Override
+    public Collection<User> getAll() {
+        return namedParameterJdbcTemplate.query(SELECT_USERS, new HashMap<>(), rowMapper());
+    }
+
+    @Override
+    public void remove(Long id) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("user_id", id);
+        namedParameterJdbcTemplate.update(DELETE_USER, params);
     }
 
     private RowMapper<User> rowMapper() {

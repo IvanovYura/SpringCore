@@ -24,7 +24,7 @@ public class BaseDbService {
             "INSERT INTO USERS (FIRST_NAME, LAST_NAME, EMAIL, BIRTHDAY) " +
                     "VALUES ('ALEX', 'SMITH', 'alex_smith@mail.com', '1990-11-26')";
 
-    public static final String SELECT_USERS =
+    private static final String SELECT_USERS =
             "SELECT * FROM USERS";
 
     private static final String CREATE_AUDITORIUM_TABLE =
@@ -63,6 +63,7 @@ public class BaseDbService {
     private void initDB() {
         createUsersTable();
         createAuditoriumsTable();
+        createEventsTable();
     }
 
     private void createUsersTable() {
